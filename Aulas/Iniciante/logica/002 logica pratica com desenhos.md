@@ -11,3 +11,5 @@
 - Mais info: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 - Não atribuímos paranteses as funções se não quisermos que elas sejam executadas imediatamente.
 - Na função para mudar o menu de contexto em programa3.html. o return false é para não exibir o menu de contexto padrão (oncontextmenu)
+- A função `setInterval(funcao,tempo)` serve para definirmos em milisegundos o intervalo que uma função será executada novamente
+- Sempre manter o escopo dos parâmetros (global ou local) em mente ao construir as funções.
