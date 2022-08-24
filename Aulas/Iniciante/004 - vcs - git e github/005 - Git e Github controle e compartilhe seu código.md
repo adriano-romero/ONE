@@ -1,0 +1,58 @@
+# Git e Github: controle e compartilhe seu código
+### Iniciando os trabalhos
+- O Git é um sistema de controle de versões, VCS (Version Control System), além dele há outros como CVS, SVN e Mercurial.
+- O Git é o mais utilizado entre eles atualmente por conta de algumas características vantajosas, como permitir uma cópia do projeto, um repositório do projeto em sua máquina, para que se possa trabalhar em cima dela e então enviá-lo para outro repositório, o que se denomina repositórios distribuídos.
+- Isso permite o trabalho de modo offline, antes da comunicação com outro servidor para que o envio de versões, e assim por diante.
+- Para iniciar um repositório no diretório atual, se usa o comando `git init`.
+- `git status` exibe a situação atual, se há arquivos alterados, não rastreados, etc.
+- `git add` adiciona arquivos/diretórios ao que é rastreado e/ou alterado. `.` "ponto" sendo atalho para adicionar todos
+- `git commit -m "mensagem"` adiciona o commit, isso é, o "histórico" com a mensagem atrelada.
+- A boa prática pede para colocarmos mensagens descritivas, evitando que fiquem muito grandes.
+- HEAD: Estado atual do nosso código, ou seja, onde o Git os colocou
+- Working tree: Local onde os arquivos realmente estão sendo armazenados e editados
+- index: Local onde o Git armazena o que será commitado, ou seja, o local entre a working tree e o repositório Git em si.
+- Mais informações sobre os estágios dos arquivos pode ser acessado [aqui](https://git-scm.com/book/pt-br/v2/Fundamentos-de-Git-Gravando-Alterações-em-Seu-Repositório)
+- Para mudar as configurações no `git config` podemos usar `--local` para mudar só no repositório atual, ao invés de `--global`
+- `git log --online` exibe informações resumidas dos commits.
+- `git log --graph` mostra as linhas (branches/merges) de desenvolvimento
+- Existe uma infinidade de formatos que podemos usar como filtros para mostrar nosso histórico, e em [git log cheatsheet](https://devhints.io/git-log) há vários delas. 
+---
+### Compartilhando o trabalho
+- Adicionamos páginas que pretendmos ignorar no `.gitignore`
+-  Nunca devemos ter commits de códigos que não funcionam, mas também não é interessante deixar para commitar apenas no final de uma feature.
+- O comando `git init --bare` serve para indicar que este repositório é puro, que contém apenas as alterações dos arquivos, e não uma cópia física de cada um dos arquivos.
+- `git remote add nome endereco` adiciona o endereço com o nome a lista de repositóritos remotos, que pode ser acessado por `git remote`
+- `git remove -v` mostra o endereço.
+- `git clone endereco nome` cloca o repositório do endereço, nome é um parâmetro opcional.
+- `git push destino branch` para enviar código a outro local(como servidor por exemplo)
+- a flag `-u` no git push, faz com que sempre que ele for realizado no branch, fará o push para o destino automaticamente
+- Branches são "ramos" de desenvolvimento, permitem a atualização do código sem alterar a branch principal.
+- O `git merge X` permite o merge/absorção da branch "x"
+- Primeiro precisamos rezliar um `git checkout main` para irmos para a branch "main", ou qualquer que seja o destino desses merges.
+- Ao invés do merge, podemos usar o `git rebase X` para que o branch absorva todos os commits da branch X, adicionando seu último commit no final.
+- O `rebase` mostrará um conflito de cada vez, enquanto o `merge` mostratá tudo num só.
+- Basicamente, o `rebase` move o ponto inicial da separação dos branches de lugar.
+- Geralmente, O `rebase` é mais "destrutivo" que o `merge"
+- "merge produces a new generated commit (the so called merge-commit). rebase only moves existing commits."
+- Geralmente você faz um rebase no branch adicional quando há uma alteração no main.
+- Em caso de conflito num merge ou rebae, Entre as linhas <<<<<<< HEAD (Current Change) e =======, estão os dados do commit atual, na master. E entre as linhas ======= e >>>>>>> lista (Incoming Change), são os dados que estamos tentando trazer da branch lista. Ou seja, é exibida exatamente a diferença entre ambos. E tudo que precisamos fazer para corrigir este conflito é remover as informações indesejadas, sem que haja duplicação.
+---
+### Manipulando as versões
+- Depois de solucionar o conflito, basta realizar o commit normalmente.
+- `git checkout -- arquivo` volta um arquivo que foi salvo mas não staged para seu estado anterior.
+- `git reset HEAD arquivo` unstage o arquivo para o HEAD, isso é, desmarca o stage, mas não desfaz as alterações nos arquivos.
+- `git revert hash` gera um novo commit desfazendo o commit informado no hash
+- `git stash` permite guardar os arquivos num Stash nem a necessidade de commit.
+- Para trazer os dados de volta,  Há duas opções: executarmos `git stash list`, e em seguida passarmos o número da stash em `git stash apply 0`, aplicaremos estas modificações, porém elas continuarão na stash. Para a remoção, poderemos usar `git stash drop`
+- O `git stash pop` é a união do `apply X` e `drop`
+- Os 7 primeiros caracters do hash já são únicos e podem ser usados para "navegar" entre os commits.
+- Se fizermos `git checkout hash` num hash antigo(anterior ao HEAD), e fizermos alterações/commits, é necessário um novo branch ou as alterações são perdidas, podendo acessá-la com `git checkout branch` normalmente enquanto houver necessidade dela.
+- Para voltar para o estado atual basta realziar um `git checkout main`
+---
+### Gerando entregas
+- Com o `git log -p` podemos visualizar o que foi alterado commit por commit.
+- O `git diff` mostra as diferenças entre os códigos, podendo mostrar as alterações ainda não commitadas/staged por exemplo
+- `git diff hash1..hash2` mostra as diferença entre os 2 commits 
+- No Git, é possível utilizar um conceito bastante similar, também denominado tag, capaz de marcar um ponto na aplicação que não pode ser modificado, fixo. Assim, após ser lançada, a versão 0.1 nunca deixará de ser a versão 0.1, e quaisquer alterações que forem feitas nela, serão incluídas na versão posterior.
+- `git tag -a v0.1.0 -m "Lançando a primeira versão (BETA) da aplicação de cursos"` criaria a tag da versão `v0.1.0`
+- Também podemos usar `git push v0.1.0` por exemplo para enviar a tag (visuzaliado na aba release no Github.)
