@@ -1,0 +1,20 @@
+# Flexbox: posicione elementos na tela
+- Quando queremos alinhar os elementos, usamos o "pai" do elemento para colocar as propriedades nela, assim os itens serão alterados de acordo com a properidade.
+- A vantagem do flexbox é que permite alinhar os elementos de forma mais intuitiva e sem ter que fazer cálculos
+- `display: flex` Inicia o flexbox no container
+- `align-items: center;` alinha os itens no centro da linha atual do container.
+- `justify-content: space-between` irá adicionar espaço entre os elementos
+- O site [Can I Use](https://caniuse.com) exibe quais navegadores as propriedades são suportadas
+- O problema do `display: inline` é que os elementos não aceitam mais que seja modificada tanto a `width` quanto a `height`
+- O problema de usar `display: inline-block` é espaçar os elementos entre si. Para fazer isso teríamos que colocar margins e fazer contas
+- O `float` é mais complicado, ele empurra o elemento para um dos lados (left | right) e os elementos que estão embaixo sobem. Além do mais o float não permite que usemos a propriedade `vertical-align: middle` para alinhar os elementos verticalmente. Ou seja, para contornar isso uma possibilidade seria ter que colocar `margin-top` ou `bottom` nos elementos e usar os temidos números mágicos!
+- O `display:flex` também iguala o tamanho dos filhos (height)
+- `flex-direction: column` altera a direção padrão para coluna
+- ` flex-wrap: wrap` indica a quebra de linha para caber dentro do container.
+- Ao trabalharmos com grids, podemos ter um problema de "gargalo", com os itens não atendendo o espaçamento adequadamente.
+- Podemos alterar só a `nth-child(Xn)` para justificar um lado do grid, alterando a cada X posições.
+- `justify-content` mexe com o eixo principal, enquanto `align-items` mexe com o "eixo cruzado"
+- [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) traz várias definições do flexbox
+- podemos usar o `flex-grow` para que o item "cresça", usando o tamanho que sobrou na página
+- O `flex-shrink` serve para controlar a proporção que o elemento irá diminuir.
+- [FLEXBOX FROGGY](http://flexboxfroggy.com), [Flexbox Defense](http://www.flexboxdefense.com) são bons sites para exercícios de flexbox.

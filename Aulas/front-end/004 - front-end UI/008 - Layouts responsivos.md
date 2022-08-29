@@ -1,0 +1,26 @@
+# Layouts Responsivos: trabalhando com layouts mobile
+- No emmet usamos `>`para indicar tags filhas
+  - `+` para indicar tags irmãs
+  - `*` para multiplicar uma tag
+  - Podemos limitar os irmãos/filhos com parênteses.
+- `em` vem de ephemeral e `rem` de root ephemeral(da raiz, ou seja, da tag html). Com isso, o seu uso é indicado por se adaptar a cada tipo de browser. O `em` pode ser usado para controlar cada bloco individualmente já que é definido pela tag mãe.
+- o SVG é definido a partir de cálculos, então independente do tamanho ele mantém a qualidade.
+- Porém acaba não possuindo textura, sendo+ indicado em imagens simplificadas, ícones e logotipos
+- Sobre conceitos de desenvolvimento. Algumas motivações para usar mobile-first:
+  - Grande parte dos acessos e vendas vem de dispositivos mobile
+  - O design é minimalista e simplificado
+  - Foco em conteúdo
+- Algumas motivações para usar desktop-first:
+  - A interface pode ter diversas features mais ricas
+  - Maior capacidade de banda e processamento
+  - O produto é otimizado para desktop (ex: Google Docs)
+- `<meta name="viewport" content="width=device-width` permite controlar a largura, dizendo para se adaptar ao aparelho. Outros métodos como height e `initial-scale`(zoom) também stão presentes no `viewport`
+- O CSS permite o uso de variáveis com `--nome: valor;`
+- Para usá-las, basta chamar `var(--nome)`
+- O `root` é um seletor ainda mais "forte/genérico" que o `html` em css.
+- É uma boa prática planejar as classes usadas antecipadamente, baseda no layout que se planeja.
+- Se uma iamgem não é relavante para a página, ela é estrutura, então irá para a parte de estilização, aka css.
+- Há uma tag `address` para suportar programas de acessibilidade
+- Os queries podem ser de `screen`, `print` se for para algo sem tela, etc
+- Se considera entre 768px e 1024px o intervalo para tamanho de tablets.
+- [Media Queries for Standard Devices](https://css-tricks.com/snippets/css/media-queries-for-standard-devices/) Para saber mais sobre breakpoints e valores genéricos para dispositivos

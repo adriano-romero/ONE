@@ -1,0 +1,31 @@
+# Acessibilidade web parte 1: tornando seu front-end inclusivo
+- O [NVAcess](https://www.nvaccess.org) é um programa para leitura de tela.
+- Deve-se tomar cuidado com a "linguagem" da página, um site em português com linguagem em Inglês acaba prejudicanado a dedicação automática do aplicativo.
+- Não se deve representar informações somente por cor.
+- "Se não está acessível, não está utilizável"
+- Outros leitores de tela são o Jaws, VoiceOver(Mac), Narrator(Windows) e Orca(Linux).
+- [WebAIM](https://webaim.org) é um site totalmente focado em acessibilidade web.
+- Para trocar a voz do NVDA basta alterar o "sintetizador" nas opções de voz.
+- O `exibidor de fala` mostra o que está sendo descrito na tela.
+- `k` é um atalho para navegar entre os links
+- `h` para navegar entre os cabeçalhos
+- `h`Podemos usar os diferentees headings no código e alterar o tamanho pelo css.
+- [Acessibilidade - por que deixarmos de ser amadores para um público que espera mais de nós](https://pt.slideshare.net/MarinaDomingues7/acessibilidade-por-que-deixarmos-de-ser-amadores-para-um-pblico-que-espera-mais-de-ns) por Marina Domingues
+- O atributo `lang` pode ser aplicada a uma tag específica para que ela seja reconhecida em outro idioma.
+- Não precisa ser redundante e falar "foto", o leitor já avisará que é uma foto ou gráfico
+- Devemos colocar o elemento `<title>` em SVGs que forem inline (código direto no HTML).
+- `longdesc` pode linkar html externos para descrição.
+- O NVDA tem um limite de 128 caracteres
+- Se a imagem é apenas para descrição, podemos deixar o `alt`vazio, assim a imagem não será reconhecida pelo leitor.
+- O Facebook desenvolveu o Detectron para descrever imagens, mas a descrição pode acabar sendo genérica e confusa. 
+- [Frontinsampa 2016 - Reinaldo Ferraz: Lang e Alt: Atributos da Pesada](https://www.youtube.com/watch?v=5FJJuEVt5sA)
+- O leitor também interpreta o CSS, dizendo os "discos" de `list-style: disc` por exemplo
+- O `display:none` e o `visibility: hidden` "escondem" do leitor também, podemos usar o "9999px" que é considerado o infinito no css ou um opacity 0
+- [Invisible Content Just for Screen Reader Users](https://webaim.org/techniques/css/invisiblecontent/)
+- Alguns leitores de tela usam atalhos para navegar com o  `role`
+- [Using ARIA](https://www.w3.org/TR/using-aria/#intro) 
+- `aria-labelledby` serve para rotular o elemento, como exemplo definir a `figcaption` como rótulo para um link
+- Podemos usar o `readonly` ao invés de `disabled` para que sejam lidos pelos leitores de tela.
+- Não devemos usar `placeholder` como label
+- Podemos usar o elemento `track` para adicionar subtítulos a um vídeo.
+- [https://www.handtalk.me/br/](HandTalk) plugin que oferece tradução digital para a Língua Brasileira de Sinais ( Libras).

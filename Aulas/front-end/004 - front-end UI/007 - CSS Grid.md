@@ -1,0 +1,18 @@
+# CSS Grid: simplificando layouts
+- O CSS Grid Layout é uma ferramenta que torna o desenvolvimento do nosso site mais simples, afinal conseguimos criar templates separados por áreas.
+- Com ele, podemos separar o conteúdo em linhas e colunas.
+- Iniciadmos a propriedade com `display: grid`
+- É necessário definir as áreas com `grid-template-areas`
+- Podemos definir os tamanhos com `grid-template-columns`e `grid-template-rows`
+- usamos o `grid-area` para associar o elemento a determinada parte do grid.
+- `vh` é o viewport height, podmeos usar `100vh` para definir que use toda tela.
+- A metodologia BEM(bloco, elemento, modificador) é a usada nesse projeto e por isso o duplo `__` na nomenclatura de alguns elementos.
+- Usamos `grid-column-start` e `grid-column-end` para definir o início e o fim das colunas, `grid-column` como shorthand. O mesmo vale para `rows`
+- `background-repeat: no-repeat;` para não repetir caso seja menor que o grid.
+- `background-size: cover;` para indicar que ocupará todo o tamanho da div.
+- `background:` serve como shorthand para essas propriedades.
+- `:nth-child` usará a classe mãe par definir os "filhos"
+- `gap` define um espaçamento entre os elementos do grid.
+- Também podemos inserir grids dentro de cada "célula".
+- Podemos definir o `rem` em casas decimais.
+- [GRID GARDEN](https://cssgridgarden.com) permite praticar com o Grid Layout.
