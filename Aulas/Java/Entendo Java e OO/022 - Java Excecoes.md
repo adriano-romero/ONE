@@ -1,0 +1,19 @@
+# Java Exceções: aprenda a criar, lançar e controlar exceções
+- O `stack` é uma pilha que organiza a ordem de execução, se inicia sempre com o método main.
+- A depuração realizada no `debug` é uma boa forma apra visualizar a execução do código de forma detalhada.
+- Captura-se exceções em java com `try {} catch(Tipoexceção e){}`
+- Uma exceção lançada, pode ser "lançada" para quem chamou a função até encontrar um tratamento ou parar a execução.
+- Exceções também são objetos, podemos usar `ex.getMessage()` para extrair a msg da exceção.
+- `.printStackTrace()` exibirá o rastro da exceção.
+- Podemos usar um pipe `|` para capturar capturar exceções diferentes.
+- `throw` só funciona com exceções.
+- `ctrl+o` no eclipse, `ctrl+f12` no Intellij idea exibe a estrutura do arquivo/outline
+- A classe `Throwable` deriva `Exception` e `Error`, o segundo tem mais relações com VM, como exemplo, o StackOverFlow.
+- `RunTimeException` são para exceções de execução e são "unchecked", isso é, não verificada pelo compilador
+- `checked` exceptions devem ser declaradas na assinatura do método até "alcançar" um tratamento (try/catch). ex: `public void funcao() throws Excecao` 
+- Um block `finally` sempre será executado após o fim do block `try`, independemente de exceção ou não.
+- Um `try` sozinho nunca é válido. Ele exige pelo menos um `catch` ou um `finally`
+- Podemos implementar a Interface `implements AutoCloseable` numa classe, que exige o método `.close()`
+  - Com isso, podemos usar a classe na chamada de `try (Classe c = new Classe()){}`
+  - O bloco `finally` será criado automaticamente e executará o `close`
+- A `IllegalArgumentException e` `IllegalStateException` são duas exceções importantes, que o desenvolvedor Java deve usar. Em geral, quando faz sentido, use uma exceção padrão em vez de criar uma própria.

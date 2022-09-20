@@ -1,0 +1,33 @@
+# Java JRE e JDK: compile e execute o seu programa
+- A plataforma Java traz:
+  - Portabilidade
+  - Fácil acesso e desenvolvimento
+  - Segurança
+  - Onipresença
+- O Java gera um bytecode que será interpretado para a JVM em cada dispositivo, de acordo com o seu sistema.
+- Hoje há programas que usam outras linguagens e geram um bytecode a partir dela.
+- Após instalar o jdk no Linux, `sudo update-alternatives --config java` mostrará o seu caminho. Para configurar a variável JAVA_HOME devemos usar esse o /bin, exemplo: `export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/bin`
+- `javac Classe.java` compila o arquivo Java.
+- `java Classe` executa o `.jar` gerado pela compilação.
+- A entrada de uma aplicação Java é sempre uma função/método `public static void main(String[] args)`
+- `System.out.println()` imprime o conteúdo no console e quebrará a linha.
+- A convenção é CamelCase para nome de classes e variáveis em minúsculos.
+- O Java faz sua atribuição (evaluation) a partir da esquerda.
+- Não se pode usar uma variável antes de inicializá-la.
+- Não podemos colocar um valor com ponto flutuante dentro de uma variável do tipo int.
+- Para poder atribuir, usamos o `casting` ex: `int valor = (int) 10.9;`
+- O `int` guarda até 32 bits, `long` gaurda até 64 bits, `short` guarda até 16 bits, `byte` 8 bits, `float` 32 bits
+- Podemos usar `f` e `l` por exemplo para definir o número como float e long respectivamente, sem casting.
+- Não é recomendado usar `double` para trabalhar com dinheiro
+- Um char cabe num inteiro, mas não o contrário, por isso o cast é necessário na atribuição.
+- Char é definido com aspas simples e String com aspas duplas, obrigatoriamente.
+- Os tipos primitivos em Java guardam o valor, não a referência.
+- Quando há apenas uma instrução/linha, as chaves no `if` não são necessárias.
+- Podemos iniciar o boolean com uma verificação, exemplo: `int idade = 68; boolean ehIdoso = idade >= 65;`
+- Os operadores lógicos devem ter no lado esquerdo e direito uma expressão booleana.
+- O operador lógico AND é representado pelos caracteres `&&` e o OR pelo `||`.
+- Uma variável declarada dentro de um bloco terá escopo local e não poderá ser usada fora dele, será reinicializada toda interação do while por exemplo.
+- Variável local não tem valor padrão e precisa ser inicializada.
+- `switch/case` é uma solução para ifs encadeados.
+- Todos os operadores de comparação e lógicos são válidos na expressão condicional do `while`
+- O `for` é definido pelo inicializador, executado apenas uma vez, condição booleana e o que executar ao fim de cada iteração. Ex: `for(int contador = 0; contador <= 10; contador++) {}`

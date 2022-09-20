@@ -1,0 +1,16 @@
+# Java OO: entendendo a Orientação a Objetos
+- [Wire Frame](https://wireframe.cc) é muito utilizado por quem quer esboçar UX
+- Uma das ideias centrais das Orientação a Objetos é que dados e funcionalidades sobre eles andam juntos.
+- Uma classe é definida por atributos e métodos, suas instanciações são os objetos
+- Criamos um objeto no java com ` Classe objeto = new Classe(atributos,...)`
+- Atribuimos os valores no objeto com `referencia.atributo =`
+- O valor padrão ao instanciar objetos é 0.
+- A variável é uma referência ao Objeto da classe e não o objeto em si. Por isso `varObjeto1 = varObjeto2` referem ao mesmo objeto.
+- `this.` indica uma referência a "esse" objeto
+- Se uma função possui retorno, podemos ou não guardar o valor.
+- métodos são chamadas a partir da referência usando o operador `.`
+- Atributos não inicializados e solicitados posteriormente podem gerar uma `NullPointerException`
+- Quando construímos classes que se limitam a ter atributos privados com os setters e getters normalmente dizemos que são classes que só carregam valor, por isso são comumente chamados de classes fantoches ou `Value Objects`
+- Se definirmos atributos no construtor, não podemos criar um objeto vazio.
+- Um atributo `static` é compartilhado entre todos os objetos que instaciaram a classe.
+- Se um método é `static` podemos invocá-lo com `Classe.metodo()` ao invés de `objeto.metodo`

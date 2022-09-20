@@ -1,0 +1,19 @@
+# Java Polimorfismo: entenda herança e interfaces
+- `extends` é a palavra chave para herança
+- Mesmo na herança não é possível acessar atributos `private` da classe-pai, a solução é o `protected`, o tornado público para os filhos e dentro do pacote
+- `super` é a palavra chave para acessar atributos/métodos da classe mãe.
+- Reescrever um método da classe-mãe é chamado de sobrescrita ou `override`
+- sobrecarga ou `overloading` é quando há mais versões do método com diferentes parâmetros.
+- A sobrecarga não leva em conta a visibilidade ou retorno do método, apenas os parâmetros e não depende da herança.
+- Pode se criar um objeto da classe-mãe a partir das classes filhas (isso é, a referência ser 1 tipo mais genérico). ex: `Funcionario g1 = new Gerente();` mas o compilador só olhará para o tipo da referência, tratando "g1" como Funcionario, sem os métodos da classe Gerente.
+- Pode-se criar um método que recebe uma referência genérica
+- Mesmo ao usar a referência genérica, o método chamado será o mais específico.
+- Ao estender uma classe se herda atributos e métodos, mas não os construtores, exceto se há o construtor padrão
+- Se uma classe é `abstract` ela não pode ser inicializada, mas pode ter um objeto referência para a classe filho.
+- Método `abstract` é um método sem corpo, será implementado nos filhos
+- Não é possível realizar herança múltipla no Java, a solução são Interfaces.
+- Para definir uma Interface usa-se a palavra `interface` no lugar de `class`
+- Uma Interface não tem nenhuma implementação ou atributos, só métodos.
+- Só devemos usar herança quando queremos reutilização de código e Polimorfismo.
+- Se o objetivo é só reutilização de código, devemos usar a Composição.
+- `abstract` e `public`são redundantes em Interfaces
