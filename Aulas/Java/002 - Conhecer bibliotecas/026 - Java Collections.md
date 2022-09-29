@@ -1,0 +1,28 @@
+# Java Collections: Dominando Listas, Sets e Mapas
+- Não é tão comum, mas `ArrayList` possuem o método `.addAll()` para adicionar múltiplos elementos
+- Para dar `override` no `compareTo` é necessário implementar a interface `Comparable`. Exemplo: `publicclass Aula implements Comparable <Aula>{}`
+- Podemos também usar o método `Comparator.comparing(classe::atributo)` para retornar um Comparator válido para o atributo pra ser usado no `sort` e afins.
+- Quanto menos nos "comprometemos" com um Objeto, ganhamos coesão e baixo acomplamento. Exemplo: `private List<Aula> aulas = new LinkedList<Aula>();`
+- `Collections.unmodifiableList(lista)` retornará uma lista apenas para visualização, assim métodos de modificação não funcionarão nela.
+- A diferença entre `ArrayList` e `LinkedList` é mais relacionada a performance. `ArrayList` permite o acesso mais rápido, com acesso a determinado index sem ter que iterar, mas alterações e remoções serão custosas já que todos os elementos terão que ser removidos. 
+- Para imprimir uma `unmodifiableList`, podemos "clonar" a lista, já que geralmente há um construtor das nossas coleções que recebem o próprio tipo, para construir um igual. Exemplo: `List<Aula> aulas = new ArrayList<>(aulasImutaveis);`
+- O `Set` não garante a ordem dos elementos e não permite elementos repetidos.
+- Podemos declarar `Collection<String> alunos = new HashSet<>();` já que `Set` e `HashSet` implementam `Collection` e `Set` respectivamente.
+- No  conjunto `Set`, há métodos que fazem busca por um objeto, como `contains(x)` ou `remove(x)`, que são muito mais rápidos se comparado com uma lista.
+- Um conjunto vazio, criado com `Collections.emptySet();` não pode receber adições, faz sentidos se quisermos representar algo que foi cancelado por exemplo.
+- `Collections.synchronizedSet(colecao)` retorna uma nova coleção que pode ser compartilahda entre Threads sem perigo.
+- Sempre que reescrevemos o método `equals()`, é necessário reescrever o `hashCode()`.
+- `TreeSet` só permite classes `Comparable` pois guarda os elementos usando a ordem natural.
+- Todas as coleções possuem um `Iterator`, ele permite o looping pela coleção.
+- `Vector` é uma Collection thread safe, mas não é recomendado pois há outras maneiras de trabalhar com multithread.
+- O `LinkedHashSet` nos dá a performance de um HashSet mas com acesso previsível e ordenado.
+---
+- A interface `Map<k,v>` não implementa `Collection`
+- `HashMap` e `LinkedHashMap` são Maps muito frequentes.
+- O `HashTable` é um Map threadsafe.
+- Se uma chave for repetida, a antiga permanece, porém, o valor é sobrescrito pelo novo valor contido na chave passada, sendo o antigo valor "esquecido" pelo Map
+- Segundo o JavaDoc, um `Map` também pode ser visto como se fossem de 3 coleções:
+  - "The Map interface provides three collection views, which allow a map's contents to be viewed as a set of keys, collection of values, or set of key-value mappings."
+- Para acessar apenas as chaves use o método `keySet()` do Map
+- Para acessar os valores existe o método `values()`
+- Para acessar as associesções existe o método `entrySet()`, cada associação é representado através da classe `Entry`
