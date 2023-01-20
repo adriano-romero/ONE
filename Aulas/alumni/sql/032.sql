@@ -1,0 +1,178 @@
+-- Criando uma procedure para cliente
+DELIMITER $$
+CREATE PROCEDURE `Exerc01`()
+
+BEGIN
+
+    DECLARE Cliente VARCHAR(10);
+    DECLARE Idade INT;
+    DECLARE DataNascimento DATE;
+    DECLARE Custo FLOAT;
+
+    SET Cliente = 'João';
+    SET Idade = 10;
+    SET DataNascimento = '20170110';
+    SET Custo = 10.23;
+
+    SELECT Cliente;
+    SELECT Idade;
+    SELECT DataNascimento;
+    SELECT Custo;
+
+END$$
+DELIMITER ;
+
+-- Proecdure para atualizar a idade do cliente
+DELIMITER $$
+CREATE PROCEDURE `Calcula_Idade`()
+BEGIN
+    UPDATE tabela_de_clientes set idade =  TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE());
+END
+$$
+DELIMITER ;
+
+-- Criando uma variável chamada NUMNOTAS e atribua a ela o número de notas fiscais do dia 01/01/2017.
+CREATE PROCEDURE `Quantidade_Notas`()
+BEGIN
+DECLARE NUMNOTAS INT;
+SELECT COUNT(*) INTO NUMNOTAS  FROM NOTAS_FISCAIS WHERE DATA_VENDA = '20170101';
+SELECT NUMNOTAS;
+END
+
+-- testando número de notas fiscais
+CREATE PROCEDURE `Testa_Numero_Notas` (DATANOTA date)
+BEGIN
+    DECLARE NUMNOTAS INT;
+    SELECT COUNT(*) INTO NUMNOTAS FROM NOTAS_FISCAIS WHERE DATA_VENDA = DATANOTA;
+    IF NUMNOTAS > 70 THEN
+        SELECT 'Muita Nota', NUMNOTAS;
+    ELSE
+        SELECT 'Pouca Nota', NUMNOTAS;
+    END IF;
+END
+
+-- stored procedure usando case condicional.
+CREATE PROCEDURE `Comparativo_Vendas_Case_Cond`(DataInicial DATE, DataFinal DATE)
+BEGIN
+DECLARE FaturamentoInicial FLOAT;
+DECLARE FaturamentoFinal FLOAT;
+DECLARE Variacao float;
+SELECT SUM(B.QUANTIDADE * B.PRECO) INTO FaturamentoInicial FROM 
+NOTAS_FISCAIS A INNER JOIN ITENS_NOTAS_FISCAIS B
+ON A.NUMERO = B.NUMERO
+WHERE A.DATA_VENDA = DataInicial;
+SELECT SUM(B.QUANTIDADE * B.PRECO) INTO FaturamentoFinal FROM 
+NOTAS_FISCAIS A INNER JOIN ITENS_NOTAS_FISCAIS B
+ON A.NUMERO = B.NUMERO
+WHERE A.DATA_VENDA = DataFinal ;
+SET Variacao = ((FaturamentoFinal / FaturamentoInicial) -1) * 100; 
+CASE
+WHEN Variacao > 10 THEN SELECT 'Verde';
+WHEN Variacao > -10 AND Variacao < 10 THEN  SELECT 'Amarelo';
+WHEN Variacao <= -10 THEN SELECT 'Vermelho';
+END CASE;
+END
+
+-- Stored Procedure usando um cursor para achar o valor total do faturamento para um mês e um ano
+CREATE PROCEDURE `mais_um_campo`()
+BEGIN
+DECLARE QUANTIDADE INT;
+DECLARE PRECO FLOAT;
+DECLARE FATURAMENTOACUM FLOAT;
+DECLARE fim_do_cursor INT;
+DECLARE c CURSOR FOR
+SELECT INF.QUANTIDADE, INF.PRECO FROM ITENS_NOTAS_FISCAIS INF
+INNER JOIN NOTAS_FISCAIS  NF ON NF.NUMERO = INF.NUMERO
+WHERE MONTH(NF.DATA_VENDA) = 1 AND YEAR(NF.DATA_VENDA) = 2017;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET fim_do_cursor = 1;
+OPEN c;
+SET fim_do_cursor = 0;
+SET FATURAMENTOACUM = 0;
+WHILE fim_do_cursor = 0
+DO
+FETCH c INTO QUANTIDADE, PRECO;
+IF fim_do_cursor = 0 THEN
+SET FATURAMENTOACUM = FATURAMENTOACUM + (QUANTIDADE * PRECO);
+END IF;
+END WHILE;
+CLOSE c;
+SELECT FATURAMENTOACUM;
+END
+
+-- FUNÇÃO para obter o número de notas
+CREATE FUNCTION `numero_notas` (DATA DATE)
+RETURNS INTEGER
+BEGIN
+DECLARE NUMNOTAS INT;
+SELECT COUNT(*) INTO NUMNOTAS FROM notas_fiscais WHERE DATA_VENDA = DATA;
+RETURN NUMNOTAS;
+END
+
+-- criando SP
+USE sucos_vendas;
+
+DROP procedure IF EXISTS p_calculo_faturamento;
+
+
+DELIMITER $$
+
+USE sucos_vendas$$
+
+CREATE PROCEDURE p_calculo_faturamento()
+
+BEGIN
+
+  DELETE FROM TAB_FATURAMENTO;
+
+  INSERT INTO TAB_FATURAMENTO
+
+  SELECT A.DATA_VENDA, SUM(B.QUANTIDADE * B.PRECO) AS TOTAL_VENDA FROM
+
+  NOTAS_FISCAIS A INNER JOIN ITENS_NOTAS_FISCAIS B
+
+  ON A.NUMERO = B.NUMERO
+
+  GROUP BY A.DATA_VENDA;
+
+END$$
+
+
+DELIMITER ;
+
+-- criando trigger 
+CREATE TABLE TAB_FATURAMENTO
+
+(DATA_VENDA DATE NULL, TOTAL_VENDA FLOAT);
+
+
+DELIMITER //
+
+CREATE TRIGGER TG_CALCULA_FATURAMENTO_INSERT AFTER INSERT ON ITENS_NOTAS_FISCAIS
+
+FOR EACH ROW BEGIN
+
+  Call p_calculo_faturamento;
+
+END//
+
+
+DELIMITER //
+
+CREATE TRIGGER TG_CALCULA_FATURAMENTO_UPDATE AFTER UPDATE ON ITENS_NOTAS_FISCAIS
+
+FOR EACH ROW BEGIN
+
+  Call p_calculo_faturamento;
+
+END//
+
+
+DELIMITER //
+
+CREATE TRIGGER TG_CALCULA_FATURAMENTO_DELETE AFTER DELETE ON ITENS_NOTAS_FISCAIS
+
+FOR EACH ROW BEGIN
+
+  Call p_calculo_faturamento;
+
+END//
